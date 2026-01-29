@@ -2,9 +2,9 @@
 
 A Django 4.1 -based open source social network application.
 ## Badges
-[![GitHub issues](https://img.shields.io/github/issues/shahsad-kp/connectionhub)](https://github.com/shahsad-kp/connectionhubk/issues)
-[![Forks](https://img.shields.io/github/forks/shahsad-kp/connectionhub)](https://github.com/shahsad-kp/connectionhubk/fork)
-[![Starts](https://img.shields.io/github/stars/shahsad-kp/connectionhub)](https://github.com/shahsad-kp/connectionhub)
+[![GitHub issues](https://img.shields.io/github.com/jojijose101/social_connection/issues)](https://github.com/jojijose101/social_connection/issues)
+[![Forks](https://img.shields.io/github.com/jojijose101/social_connection/fork)](https://github.com/jojijose101/social_connection/fork)
+[![Starts](https://img.shields.io/github/stars/jojijose101/social_connection)](https://github.com/jojijose101/social_connection)
 
 
 
@@ -24,11 +24,11 @@ A Django 4.1 -based open source social network application.
 ## Installation
 1. Clone or download this repository and open it in your editor of choice: 
 ```bash
-git clone https://github.com/shahsad-kp/ConnectionHub.git
+git clone https://github.com/jojijose101/social_connection
 ```
 2. cd into project repository.
 ```bash
- cd ConnectionHub
+ cd social_connection
  ``` 
 3. To get this project up and running you should start by having Python installed on your computer. It's advised you create a virtual environment to store your projects dependencies separately. You can install virtualenv with
 
@@ -57,17 +57,36 @@ pip -r install requirements.txt
 ```
 Modify `ConnectionHub/setting.py` with database settings based on your requirements
 
+7. Set Your credential Informations in .env file:
+- To generate SECRET_KEY, in Terminal:
+```bash
+python -c "from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())"
 
-7. Run the following commands in the root folder.
+```
+- To generate FERNET_KEY, in Terminal:
+```bash
+python -c "from cryptography.fernet import Fernet; print(Fernet.generate_key().decode())"
+
+```
+- To generate OTP_SECRET_KEY, in Terminal:
+```bash
+python -c "import pyotp;secret = pyotp.random_base32();print(secret)"
+
+```
+- For Email OTP setup
+[How To Set Up Gmail SMTP Server - Full Guide
+]("https://www.youtube.com/watch?v=ZfEK3WP73eY")
+
+8. Run the following commands in the root folder.
 ```bash
 python manage.py makemigrations
 python manage.py migrate
 ```
-8. Also create a superuser by :
+9. Also create a superuser by :
 ```bash
 python manage.py createsuperuser
 ```
-9. To get start runserver locally by:
+10. To get start runserver locally by:
 ```bash
 python manage.py runserver
 ```
