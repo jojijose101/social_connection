@@ -74,7 +74,7 @@ python -c "import pyotp;secret = pyotp.random_base32();print(secret)"
 
 ```
 - For Email OTP setup
-[How To Set Up Gmail SMTP Server - Full Guide]("https://www.youtube.com/watch?v=ZfEK3WP73eY")
+  [How To Set Up Gmail SMTP Server - Full Guide](https://www.youtube.com/watch?v=ZfEK3WP73eY)
 
 8. Run the following commands in the root folder.
 ```bash
