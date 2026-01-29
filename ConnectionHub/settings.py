@@ -12,16 +12,20 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 
-from environ import environ
+import environ
 from cryptography.fernet import Fernet
 import os
+import pymysql
+pymysql.install_as_MySQLdb()
 
-# Initialise environment variables
-env = environ.Env()
-environ.Env.read_env()
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+# Initialise environment variables
+
+env = environ.Env()
+env.read_env(os.path.join(BASE_DIR, '.env'))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
@@ -35,14 +39,17 @@ DEBUG = True
 ALLOWED_HOSTS = ['*']
 
 # Application definition
-
 INSTALLED_APPS = [
+    'channels', 
+    'daphne',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
     'Home.apps.HomeConfig',
     'Users.apps.UsersConfig',
     'Posts.apps.PostsConfig',
@@ -53,12 +60,12 @@ INSTALLED_APPS = [
     'Communications.apps.CommunicationsConfig',
     'UsersSettings.apps.UserssettingsConfig',
     'Notifications.apps.NotificationsConfig',
+
     'Admin.AdminHome.apps.AdminhomeConfig',
     'Admin.AdminHelp.apps.AdminhelpConfig',
     'Admin.AdminPost.apps.AdminpostConfig',
     'Admin.AdminReports.apps.AdminreportsConfig',
     'Admin.AdminUsers.apps.AdminusersConfig',
-    'channels'
 ]
 
 MIDDLEWARE = [
@@ -98,12 +105,12 @@ ASGI_APPLICATION = 'ConnectionHub.asgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': 'django.db.backends.mysql',
         'NAME': env('DATABASE_NAME'),
         'USER': env('DATABASE_USERNAME'),
         'PASSWORD': env('DATABASE_PASSWORD'),
         'HOST': env('DATABASE_HOST'),
-        'POST': env('DATABASE_PORT')
+        'PORT': env('DATABASE_PORT')
     },
 }
 

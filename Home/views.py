@@ -5,7 +5,6 @@ from django.shortcuts import render
 from Users.models import User
 from utils.posts import get_suggested_post
 
-
 @login_required(login_url='user-login')
 def home_view(request: HttpRequest) -> HttpResponse:
     user = User.objects.get(username=request.user.username)

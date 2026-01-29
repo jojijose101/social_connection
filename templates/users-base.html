@@ -2,10 +2,44 @@
 {% load static %}
 
 {% block body %}
+<style>
+@media (max-width: 768px) {
+
+    /* Turn logo into top navbar */
+    .left-bar-logo {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 70%;
+        height: 60px;
+        background: var(--secondary-background);
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        z-index: 1000;
+    }
+
+    .left-bar-logo img {
+        width: 80px;
+        height: auto;
+    }
+
+    /* Push content down so it doesn't hide under navbar */
+    .left-bar-except-root {
+        margin-top: 70px;
+    }
+    .left-bar-logo {
+    transition: transform 0.3s ease;
+}
+
+}
+
+
+</style>
     <div class="dis-row">
         <div class="dis-col left-bar secondary-background just-cent gap-20">
             <div class="left-bar-logo">
-                <img style="width: 40%; height: 100%" src="{% static 'logo/logo.svg' %}" alt="logo of connectionhub">
+                <img style="width: 50%; height: 100%" src="{% static 'logo/logo.svg' %}" alt="logo of Social Sphere">
             </div>
             <a href="{% url 'user-home' %}">
                 <div id="home-left-bar"
@@ -87,4 +121,41 @@
             {% endblock %}
         </div>
     </div>
+    <script>
+    let lastScrollTop = 0;
+
+    function isMobileView() {
+        return window.innerWidth <= 768;
+    }
+
+    window.addEventListener('scroll', function () {
+        if (!isMobileView()) return;
+
+        const logoBar = document.querySelector('.left-bar-logo');
+        if (!logoBar) return;
+
+        let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+        if (scrollTop > lastScrollTop && scrollTop > 60) {
+            // scrolling down → hide
+            logoBar.style.transform = 'translateY(-100%)';
+        } else {
+            // scrolling up → show
+            logoBar.style.transform = 'translateY(0)';
+        }
+
+        lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+    });
+
+    /* Reset logo when switching back to desktop */
+    window.addEventListener('resize', function () {
+        if (!isMobileView()) {
+            const logoBar = document.querySelector('.left-bar-logo');
+            if (logoBar) {
+                logoBar.style.transform = 'translateY(0)';
+            }
+        }
+    });
+</script>
+
 {% endblock %}

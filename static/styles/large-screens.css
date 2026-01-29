@@ -31,9 +31,7 @@
     flex-direction: row;
 }
 
-.saved-post{
-    /*flex: 1;*/
-}
+
 
 .users-list {
     grid-template-columns: 1fr 1fr 1fr;
@@ -49,3 +47,4 @@
 .chat-root{
     margin-left: 10px;
 }
+

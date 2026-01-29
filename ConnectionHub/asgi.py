@@ -14,7 +14,6 @@ from channels.layers import get_channel_layer
 from channels.routing import ProtocolTypeRouter, URLRouter
 from django.contrib.staticfiles.handlers import ASGIStaticFilesHandler
 from django.core.asgi import get_asgi_application
-
 import Communications.routing
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'ConnectionHub.settings')
@@ -30,7 +29,4 @@ application = ProtocolTypeRouter(
     }
 )
 
-application = ASGIStaticFilesHandler(application)
-
-channel_layer = get_channel_layer()
-
+print("ASGI application and channel layer loaded.")
